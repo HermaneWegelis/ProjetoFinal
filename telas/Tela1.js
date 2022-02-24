@@ -1,26 +1,41 @@
+/* Importando as bibliotecas e pacotes necessários*/
 import { Dimensions, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useState } from "react/cjs/react.development";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+/* Definindo a tela Mapa */
 export default function Mapa({ navigation }) {
-  const [server, setServer] = useState([]);
-
+  
+  const [servers, setServers] = useState([]);
+/*Acessando uma rota protegida com um Token */
   async function fetchData() {
     const mark = await fetch("https://mobile.ect.ufrn.br:3003/markers", {
       headers: {Authorization: 'Bearer vv7oTsHdw0X9g5e7QbniP58j3iJY4h6AoOSxMIw2X8xjokSHjF',},
     });
+    /* Definindo a constante que irá receber os marcadores*/
     const marcadores = await mark.json();
 
-    setServer(marcadores);
+    setServers(marcadores);
   }
   fetchData();
 
+  /*Definindo o MapView e acessando seus atributos no servidor */
   return (
-    <View style={styles.container}>
-      <MapView style={styles.mapa}>
-      {server.map((local) => (
+    <View style={styles.bloco}>
+      
+      <MapView style={styles.mapa}
+      initialRegion={{
+        latitude: -5.8434642195,
+        longitude: -35.1993067557,
+        latitudeDelta: 0.0833552,
+        longitudeDelta: 0.0333552,
+      }}
+      
+      >
+        
+      {servers.map((local) => (
           <Marker
             key={local.id}
             title={local.title}
@@ -33,10 +48,12 @@ export default function Mapa({ navigation }) {
           </Marker>
     ))}
       </MapView>
+      
       <View style={styles.mapinha}>
+      
         <View style={styles.botao}>
-          <TouchableOpacity onPress={() => navigation.navigate("Marcador")}>
-            <FontAwesome5 name="map-marked" size={70} color="black" />
+          <TouchableOpacity onPress={() => navigation.navigate("AdicionarMarcador")}>
+          <Ionicons name="add-circle" size={70} color="green" />
           </TouchableOpacity>
            
        
@@ -45,9 +62,9 @@ export default function Mapa({ navigation }) {
     </View>
   );
 }
-
+/* Acima a função para acessar a tela que tem a função Marcador, quando pressionado o botão*/
 const styles = StyleSheet.create({
-  container: {
+  bloco: {
     alignItems: "center",
     backgroundColor: "#fff",
     height: "100%",
@@ -55,7 +72,7 @@ const styles = StyleSheet.create({
   },
   mapinha:{ 
     width: "100%", 
-    alignItems: "flex-end" 
+    alignItems: "flex-end",
   },
   mapa: {
     width: Dimensions.get("window").width,
@@ -65,8 +82,5 @@ const styles = StyleSheet.create({
   botao: {
     borderRadius: 70,
     margin: 20,
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
   },
 });
