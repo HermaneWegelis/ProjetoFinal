@@ -3,7 +3,7 @@
 O link do projeto está na branch master!
 </p>#Referências:
 <li>https://www.youtube.com/channel/UCtT1NtbiBgfs7bVms7pLCIA/videos
-<li>https://www.ruyi-pr.com/cse?q=KeyboardAvoidingView
+<li>https://blog.logrocket.com/keyboardawarescrollview-keyboardavoidingview-react-native/
 <li>https://stackoverflow.com/questions/41754471/change-button-color-react-native
 <li>https://github.com/react-native-maps/react-native-maps
 <li>https://reactnative.dev/docs/button
