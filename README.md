@@ -12,3 +12,4 @@ O link do projeto está na branch master!
 <li>https://html-color-codes.info/Codigos-de-Cores-HTML/
 <li>https://reactnavigation.org/docs/stack-navigator/
 <li>https://reactnavigation.org/docs/navigation-container/
+<li>https://reactnative.dev/docs/textinput
